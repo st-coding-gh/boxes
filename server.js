@@ -6,6 +6,7 @@ app.get('/', (req, res) => {
   res.json({
     project: 'boxes',
     stack: ['express', 'webpack', 'react'],
+    description: 'an application to manage storage on shelves',
   })
 })
 
