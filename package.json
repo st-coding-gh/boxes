@@ -3,19 +3,25 @@
   "name": "boxes",
   "version": "1.0.0",
   "description": "an application to manage storage on shelves",
-  "scripts": {
-    "express": "nodemon server.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/st-coding-gh/boxes.git"
   },
   "author": "ST",
   "homepage": "https://github.com/st-coding-gh/boxes#readme",
+  "prisma": {
+    "schema": "database/schema.prisma"
+  },
   "dependencies": {
-    "express": "^4.18.2"
+    "@prisma/client": "^5.4.1",
+    "express": "^4.18.2",
+    "prisma": "^5.4.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "scripts": {
+    "express": "nodemon server.js",
+    "prisma": "prisma studio"
   }
 }
