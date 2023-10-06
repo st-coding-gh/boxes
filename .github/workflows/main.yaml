@@ -20,7 +20,7 @@ jobs:
         run: echo "${{ secrets.ENV }}" > .env
 
       - name: remove files
-        run: rm -R readme.md .git .github .gitignore
+        run: rm -R readme.md .git .github .gitignore package-lock.json
 
       - name: list folders
         run: ls -la
