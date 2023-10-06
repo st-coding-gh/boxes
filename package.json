@@ -1,14 +1,21 @@
 {
+  "type": "module",
   "name": "boxes",
   "version": "1.0.0",
   "description": "an application to manage storage on shelves",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "express": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/st-coding-gh/boxes.git"
   },
   "author": "ST",
-  "homepage": "https://github.com/st-coding-gh/boxes#readme"
+  "homepage": "https://github.com/st-coding-gh/boxes#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
