@@ -1,4 +1,4 @@
-const url = '/database/getAllItems'
+const url = '/database/get-all'
 const input = document.getElementById('input')
 const output = document.getElementById('output')
 
