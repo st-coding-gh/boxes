@@ -70,16 +70,23 @@ function modalHandler(target, setShowModal, setStatus) {
     setShowModal(false)
   }
   if (target.matches('.boxes-li')) {
+    // create const values
     const box = target.innerHTML
     const inputElement = document.getElementById('input')
     const items = inputElement.textContent
-    createItem(box, items)
-    inputElement.innerHTML = ''
-    setShowModal(false)
-    setStatus({
-      show: true,
-      type: 'success',
-      message: `добавлено: ${items}`,
+
+    //create item
+    createItem(box, items).then(res => {
+      console.log(res)
+      const itemsRes = res.map(e => e.item).join(', ')
+      const boxRes = res[0].box
+      inputElement.innerHTML = ''
+      setShowModal(false)
+      setStatus({
+        show: true,
+        type: 'success',
+        message: `в коробку ${boxRes} добавлено: ${itemsRes}`,
+      })
     })
   }
 }
@@ -89,4 +96,5 @@ async function createItem(box, items) {
   const urlReq = `${url}?box=${box}&items=${items}`
   const req = await fetch(urlReq)
   const res = await req.json()
+  return res
 }
