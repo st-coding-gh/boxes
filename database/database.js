@@ -17,7 +17,7 @@ export async function createItems(req) {
   if (error) return { error: error }
 
   //create
-  const items = req.query.items.split(';')
+  const items = req.query.items.split(';').map(e => e.trim())
   const promises = items.map(item => {
     return prisma.items.create({
       data: {
