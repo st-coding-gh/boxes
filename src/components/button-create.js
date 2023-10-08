@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import Modal from './modal.js'
+import ModalCreate from './modal-create.js'
 import Boxes from './boxes.js'
+import { getAll } from '../index.js'
 
-export default function ({ setStatus, fullMatch }) {
+export default function ({ setStatus, fullMatch, setData }) {
   const inputElem = document.getElementById('input')
   const [canCreate, setCanCreate] = useState(false)
   const [showModal, setShowModal] = useState(false)
@@ -25,13 +26,14 @@ export default function ({ setStatus, fullMatch }) {
         положить в коробку
       </button>
       {showModal && (
-        <Modal
+        <ModalCreate
           modalHandler={modalHandler}
           setShowModal={setShowModal}
           setStatus={setStatus}
+          setData={setData}
         >
           <Boxes></Boxes>
-        </Modal>
+        </ModalCreate>
       )}
     </>
   )
@@ -65,8 +67,8 @@ function permitToCreate(
   }
 }
 
-function modalHandler(target, setShowModal, setStatus) {
-  if (target.matches('#modal')) {
+function modalHandler(target, setShowModal, setStatus, setData) {
+  if (target.matches('.modal')) {
     setShowModal(false)
   }
   if (target.matches('.boxes-li')) {
@@ -87,6 +89,7 @@ function modalHandler(target, setShowModal, setStatus) {
         type: 'success',
         message: `в коробку ${boxRes} добавлено: ${itemsRes}`,
       })
+      getAll(setData)
     })
   }
 }

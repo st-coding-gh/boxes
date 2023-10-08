@@ -2,26 +2,46 @@
 :root {
   --color-error: crimson;
   --color-success: darkgreen;
-  --color-modal: darkslategrey;
-  --color-boxes: #cfe5cf;
-}
-
-*, button {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  --color-boxes: darkslategrey;
+  --color-modal: #cfe5cf;
 }
 
 html {
   font-size: 10px;
 }
 
+*, button {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
+}
+
+
+
 .highlighted {
   color: var(--color-error);
 }
 
-.output-list {
+.output-ul {
   list-style-type: none;
-  font-size: 2rem;
   padding: 0;
+}
+
+.output-li {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.output-box {
+  width: 5rem;
+  min-height: 5rem;
+  margin-right: 1rem;
+}
+
+.output-item {
+  min-height: 5rem;
+  width: 100%;
+  margin-right: 1rem;
 }
 
 #input {
@@ -55,7 +75,7 @@ html {
   font-size: 2rem;
 }
 
-#modal {
+.modal {
   position:absolute;
   top: 0;
   right: 0;
@@ -70,7 +90,7 @@ html {
   justify-content: center;
 }
 
-#modal > * {
+.modal > * {
   font-size: 3rem;
   color: black;
   width: 30rem;
@@ -78,6 +98,7 @@ html {
   border: 2px solid gray;
   padding: 1rem;
   box-shadow: 5px 5px gray;
+  background-color: var(--color-modal);
 }
 
 #boxes {
@@ -86,7 +107,7 @@ html {
   grid-template-columns: repeat(6, 1fr);
   align-content: space-evenly;
   justify-content: space-evenly;
-  background-color: var(--color-boxes);
+  /* background-color: var(--color-modal); */
 }
 
 #boxes > li {
@@ -99,6 +120,6 @@ html {
   align-items: center;
   justify-content: center;
 
-  background-color: var(--color-modal);
+  background-color: var(--color-boxes);
   color: white;
 }

@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client'
 import React, { useEffect, useState } from 'react'
 import Input from './components/input.js'
 import Button from './components/button-create.js'
+import Output from './components/output.js'
 
 const rootElem = document.getElementById('root')
 const root = createRoot(rootElem)
-const url = 'http://localhost:3333/database/get-all'
 
 root.render(<App />)
 
@@ -21,16 +21,16 @@ function App() {
   })
 
   useEffect(() => {
-    getAll(url, data => {
-      setData(data)
-    })
-  })
+    getAll(setData)
+  }, [])
+
   return (
     <>
       <h1>Boxes</h1>
       <Button
         setStatus={setStatus} //
-        fullMatch={fullMatch}
+        fullMatch={fullMatch} //
+        setData={setData}
       />
       <Input
         filterDataByInput={filterDataByInput} //
@@ -44,7 +44,13 @@ function App() {
           {status.message}
         </p>
       )}
-      <ul className="output-list">{outputList}</ul>
+      <Output
+        outputList={outputList}
+        setStatus={setStatus}
+        setOutputList={setOutputList}
+        setData={setData}
+      />
+      {/* <ul className="output-list">{outputList}</ul> */}
     </>
   )
 }
@@ -65,13 +71,14 @@ function filterDataByInput(value, data, setOutputList) {
     )
     return e.item.match(new RegExp(lastValueEscaped, 'gi'))
   })
-  const newOutputList = filteredData.map((e, i) => {
-    return <li key={i}>{`${e.box} ${e.item}`}</li>
-  })
-  setOutputList(newOutputList)
+  // const newOutputList = filteredData.map((e, i) => {
+  //   return <li key={i}>{`${e.box} ${e.item}`}</li>
+  // })
+  setOutputList(filteredData)
 }
 
-async function getAll(url, setData) {
+export async function getAll(setData) {
+  const url = 'http://localhost:3333/database/get-all'
   const res = await fetch(url)
   const data = await res.json()
   setData(data)
