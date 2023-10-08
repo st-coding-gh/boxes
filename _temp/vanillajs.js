@@ -1,4 +1,5 @@
-const url = '/database/get-all'
+import './style.css'
+const url = 'http://localhost:3333/database/get-all'
 const input = document.getElementById('input')
 const output = document.getElementById('output')
 
@@ -38,3 +39,19 @@ async function main() {
 }
 
 main()
+
+// editable tests
+
+const editable = document.getElementById('editable')
+editable.addEventListener('input', e => {
+  const input = e.target.textContent
+  const inputModified = input.replace(/\d/gi, '<span class="marked">$&</span>')
+  e.target.innerHTML = inputModified + "<span id='end'></span>"
+
+  //move cursor to the end of the div input
+  const selection = window.getSelection()
+  selection.removeAllRanges()
+  const range = document.createRange()
+  range.setStart(end, 0)
+  selection.addRange(range)
+})
