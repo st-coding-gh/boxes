@@ -1,5 +1,4 @@
 import React from 'react'
-import createItem from '../functions/createItem.js'
 
 export default function ({
   children,
@@ -7,6 +6,7 @@ export default function ({
   setShowModal,
   setStatus,
   setData,
+  createItem,
 }) {
   return (
     <div

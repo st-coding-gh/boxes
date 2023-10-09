@@ -58,8 +58,8 @@ function App() {
       <ButtonCreate
         setStatus={setStatus}
         fullMatch={fullMatch}
-        setData={setData}
         setShowModal={setShowModal}
+        permitToCreate={permitToCreate}
       />
 
       {showModal && (
@@ -68,31 +68,34 @@ function App() {
           setShowModal={setShowModal}
           setStatus={setStatus}
           setData={setData}
+          createItem={createItem}
         >
-          <Boxes></Boxes>
+          <Boxes getBoxNumbers={getBoxNumbers}></Boxes>
         </ModalCreate>
       )}
 
       <Input
-        filterDataByInput={filterDataByInput} //
-        data={data} //
-        setOutputList={setOutputList} //
-        setStatus={setStatus} //
+        filterDataByInput={filterDataByInput}
+        data={data}
+        setOutputList={setOutputList}
+        setStatus={setStatus}
         setFullMatch={setFullMatch}
+        highlightFullMatches={highlightFullMatches}
       />
       {status.show && (
         <p id="status" className={`status-${status.type}`}>
           {status.message}
         </p>
       )}
+
       <Output
         outputList={outputList}
-        setStatus={setStatus}
-        setOutputList={setOutputList}
-        setData={setData}
         setDataItem={setDataItem}
         setShowModalItem={setShowModalItem}
+        createList={createList}
+        outputClickHandler={outputClickHandler}
       />
+
       {showModalItem && (
         <ModalItem
           setShowModalItem={setShowModalItem}
@@ -100,6 +103,10 @@ function App() {
           setStatus={setStatus}
           setOutputList={setOutputList}
           setData={setData}
+          getAll={getAll}
+          url={url}
+          deleteItem={deleteItem}
+          itemDeleteHandler={itemDeleteHandler}
         ></ModalItem>
       )}
     </>

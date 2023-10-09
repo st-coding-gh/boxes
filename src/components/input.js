@@ -1,5 +1,4 @@
 import React from 'react'
-import highlightFullMatches from '../functions/highlightFullMatches.js'
 
 export default function Input({
   filterDataByInput,
@@ -7,6 +6,7 @@ export default function Input({
   setOutputList,
   setStatus,
   setFullMatch,
+  highlightFullMatches,
 }) {
   return (
     <div

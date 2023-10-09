@@ -1,9 +1,4 @@
-import React, { useState } from 'react'
-import getAll from '../functions/getAll.js'
-import getURL from '../consts/url.js'
-const url = getURL()
-import deleteItem from '../functions/deleteItem.js'
-import itemDeleteHandler from '../functions/itemDeleteHandler.js'
+import React from 'react'
 
 export default function ({
   setShowModalItem,
@@ -11,6 +6,10 @@ export default function ({
   setStatus,
   setOutputList,
   setData,
+  getAll,
+  url,
+  deleteItem,
+  itemDeleteHandler,
 }) {
   return (
     <div

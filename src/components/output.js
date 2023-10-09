@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import createList from '../functions/createList.js'
-import outputClickHandler from '../functions/outputClickHandler.js'
+import React from 'react'
 
 export default function ({
   outputList,
-  setStatus,
-  setOutputList,
-  setData,
   setShowModalItem,
   setDataItem,
+  createList,
+  outputClickHandler,
 }) {
   return (
     <>

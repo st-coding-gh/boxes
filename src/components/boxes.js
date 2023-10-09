@@ -1,7 +1,6 @@
 import React from 'react'
-import getBoxNumbers from '../functions/getBoxNumbers.js'
 
-export default function () {
+export default function ({ getBoxNumbers }) {
   const boxNumbers = getBoxNumbers()
   const boxes = []
   for (let i = 0; i < 24; i++) {

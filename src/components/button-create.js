@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import permitToCreate from '../functions/permitToCreate.js'
+import React from 'react'
 
-export default function ({ setStatus, fullMatch, setData, setShowModal }) {
+export default function ({
+  setStatus,
+  fullMatch,
+  setShowModal,
+  permitToCreate,
+}) {
   const inputElem = document.getElementById('input')
-  const [canCreate, setCanCreate] = useState(false)
 
   return (
     <>
@@ -11,13 +14,7 @@ export default function ({ setStatus, fullMatch, setData, setShowModal }) {
         id="create"
         onClick={() => {
           const input = inputElem.textContent
-          permitToCreate(
-            input,
-            fullMatch,
-            setStatus,
-            setCanCreate,
-            setShowModal
-          )
+          permitToCreate(input, fullMatch, setStatus, setShowModal)
         }}
       >
         положить в коробку

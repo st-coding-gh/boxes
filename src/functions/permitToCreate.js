@@ -2,7 +2,6 @@ export default function permitToCreate(
   input,
   fullMatch,
   setStatus,
-  setCanCreate,
   setShowModal
 ) {
   input = input.trim()
@@ -19,7 +18,6 @@ export default function permitToCreate(
       message: 'уже есть в коробках',
     })
   } else {
-    setCanCreate(true)
     setShowModal(true)
   }
 }
