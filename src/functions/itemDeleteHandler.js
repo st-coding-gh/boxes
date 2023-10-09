@@ -2,7 +2,7 @@ export default function itemDeleteHandler(
   dataItem,
   setStatus,
   deleteItem,
-  setModalItem,
+  setShowModalItem,
   setOutputList,
   setData,
   url,
@@ -11,7 +11,7 @@ export default function itemDeleteHandler(
   deleteItem(url.deleteItem, dataItem).then(res => {
     const inputElement = document.getElementById('input')
     inputElement.innerHTML = ''
-    setModalItem(false)
+    setShowModalItem(false)
     setStatus({
       show: true,
       type: 'success',

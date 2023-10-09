@@ -6,7 +6,7 @@ import deleteItem from '../functions/deleteItem.js'
 import itemDeleteHandler from '../functions/itemDeleteHandler.js'
 
 export default function ({
-  setModalItem,
+  setShowModalItem,
   dataItem,
   setStatus,
   setOutputList,
@@ -17,7 +17,7 @@ export default function ({
       id="modal-items"
       className="modal"
       onClick={e => {
-        if (e.target.matches('.modal')) setModalItem(false)
+        if (e.target.matches('.modal')) setShowModalItem(false)
       }}
     >
       <div>
@@ -29,7 +29,7 @@ export default function ({
               dataItem,
               setStatus,
               deleteItem,
-              setModalItem,
+              setShowModalItem,
               setOutputList,
               setData,
               url,

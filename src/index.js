@@ -11,7 +11,7 @@ import ButtonCreate from './components/button-create.js'
 import Output from './components/output.js'
 import Boxes from './components/boxes.js'
 import ModalItem from './components/modal-item.js'
-import ModalCreate from './components/button-create.js'
+import ModalCreate from './components/modal-create.js'
 
 // FUNCTIONS
 import createItem from './functions/createItem.js'
@@ -43,6 +43,9 @@ function App() {
     type: 'error',
     message: null,
   })
+  const [showModal, setShowModal] = useState(false)
+  const [showModalItem, setShowModalItem] = useState(false)
+  const [dataItem, setDataItem] = useState('initial')
 
   useEffect(() => {
     getAll(url.getAll, setData)
@@ -51,11 +54,25 @@ function App() {
   return (
     <>
       <h1>Boxes</h1>
+
       <ButtonCreate
-        setStatus={setStatus} //
-        fullMatch={fullMatch} //
+        setStatus={setStatus}
+        fullMatch={fullMatch}
         setData={setData}
+        setShowModal={setShowModal}
       />
+
+      {showModal && (
+        <ModalCreate
+          modalHandler={modalHandler}
+          setShowModal={setShowModal}
+          setStatus={setStatus}
+          setData={setData}
+        >
+          <Boxes></Boxes>
+        </ModalCreate>
+      )}
+
       <Input
         filterDataByInput={filterDataByInput} //
         data={data} //
@@ -73,7 +90,18 @@ function App() {
         setStatus={setStatus}
         setOutputList={setOutputList}
         setData={setData}
+        setDataItem={setDataItem}
+        setShowModalItem={setShowModalItem}
       />
+      {showModalItem && (
+        <ModalItem
+          setShowModalItem={setShowModalItem}
+          dataItem={dataItem}
+          setStatus={setStatus}
+          setOutputList={setOutputList}
+          setData={setData}
+        ></ModalItem>
+      )}
     </>
   )
 }
