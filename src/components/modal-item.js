@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { getAll } from '../index.js'
+import getAll from '../functions/getAll.js'
+import getURL from '../consts/url.js'
+const url = getURL()
+import deleteItem from '../functions/deleteItem.js'
+import itemDeleteHandler from '../functions/itemDeleteHandler.js'
 
 export default function ({
   setModalItem,
@@ -27,7 +31,9 @@ export default function ({
               deleteItem,
               setModalItem,
               setOutputList,
-              setData
+              setData,
+              url,
+              getAll
             )
           }
         >
@@ -36,34 +42,4 @@ export default function ({
       </div>
     </div>
   )
-}
-
-function itemDeleteHandler(
-  dataItem,
-  setStatus,
-  deleteItem,
-  setModalItem,
-  setOutputList,
-  setData
-) {
-  deleteItem(dataItem).then(res => {
-    const inputElement = document.getElementById('input')
-    inputElement.innerHTML = ''
-    setModalItem(false)
-    setStatus({
-      show: true,
-      type: 'success',
-      message: `предмет удален: ${res.item}`,
-    })
-    setOutputList(null)
-    getAll(setData)
-  })
-}
-
-async function deleteItem(dataItem) {
-  const url = 'http://localhost:3333/database/delete-item'
-  const urlReq = `${url}?id=${dataItem.id}`
-  const req = await fetch(urlReq)
-  const res = await req.json()
-  return res
 }

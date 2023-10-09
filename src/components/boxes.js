@@ -1,4 +1,5 @@
 import React from 'react'
+import getBoxNumbers from '../functions/getBoxNumbers.js'
 
 export default function () {
   const boxNumbers = getBoxNumbers()
@@ -12,12 +13,4 @@ export default function () {
   }
 
   return <ul id="boxes">{boxes}</ul>
-}
-
-function getBoxNumbers() {
-  const boxesNumbers = '1234'.split('').reduce((a, shelf) => {
-    '123456'.split('').forEach(box => a.push(`${shelf}.${box}`))
-    return a
-  }, [])
-  return boxesNumbers
 }

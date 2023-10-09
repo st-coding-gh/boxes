@@ -1,4 +1,5 @@
 import React from 'react'
+import createItem from '../functions/createItem.js'
 
 export default function ({
   children,
@@ -12,7 +13,7 @@ export default function ({
       id="modal-create"
       className="modal"
       onClick={event => {
-        modalHandler(event.target, setShowModal, setStatus, setData)
+        modalHandler(event.target, setShowModal, setStatus, setData, createItem)
       }}
     >
       {children}

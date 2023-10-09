@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ModalItem from './modal-item.js'
+import createList from '../functions/createList.js'
+import outputClickHandler from '../functions/outputClickHandler.js'
 
 export default function ({ outputList, setStatus, setOutputList, setData }) {
   const [modalItem, setModalItem] = useState(false)
@@ -24,33 +26,4 @@ export default function ({ outputList, setStatus, setOutputList, setData }) {
       )}
     </>
   )
-}
-
-function createList(outputList) {
-  if (outputList) {
-    const newOutputList = outputList.map((e, i) => {
-      return (
-        <li className="output-li" key={i}>
-          <button className="output-box" data-id={e.id}>
-            {e.box}
-          </button>
-          <button className="output-item" data-id={e.id}>
-            {e.item}
-          </button>
-        </li>
-      )
-    })
-    return newOutputList
-  }
-}
-
-function outputClickHandler(e, setModalItem, setDataItem) {
-  console.log(e.target)
-  if (e.target.matches('.output-item')) {
-    setModalItem(true)
-    setDataItem({
-      item: e.target.textContent,
-      id: e.target.dataset.id,
-    })
-  }
 }
