@@ -6,12 +6,22 @@ export default function ({
   setDataItem,
   createList,
   outputClickHandler,
+  setShowModalItemBox,
+  setDataItemBox,
 }) {
   return (
     <>
       <ul
         className="output-ul"
-        onClick={e => outputClickHandler(e, setShowModalItem, setDataItem)}
+        onClick={e =>
+          outputClickHandler(
+            e,
+            setShowModalItem,
+            setDataItem,
+            setShowModalItemBox,
+            setDataItemBox
+          )
+        }
       >
         {createList(outputList)}
       </ul>

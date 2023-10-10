@@ -6,3 +6,12 @@ export default function () {
     updateItem: 'http://localhost:3333/database/update-item',
   }
 }
+
+// export default function () {
+//   return {
+//     getAll: '/database/get-all',
+//     createItem: '/database/create-items',
+//     deleteItem: '/database/delete-item',
+//     updateItem: '/database/update-item',
+//   }
+// }

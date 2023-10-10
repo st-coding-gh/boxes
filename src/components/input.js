@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Input({
   filterDataByInput,
@@ -8,6 +8,11 @@ export default function Input({
   setFullMatch,
   highlightFullMatches,
 }) {
+  useEffect(() => {
+    const input = document.getElementById('input')
+    input.focus()
+  }, [])
+
   return (
     <div
       id="input"

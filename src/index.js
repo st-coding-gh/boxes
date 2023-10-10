@@ -15,6 +15,7 @@ import ModalCreate from './components/modal-create.js'
 import ModalItemInput from './components/modal-item-input.js'
 import ModalItemDelete from './components/modal-item-delete.js'
 import ModalItemUpdate from './components/modal-item-update.js'
+import ModalBox from './components/modal-box.js'
 
 // FUNCTIONS --------------------------------------------------------
 import createItem from './functions/createItem.js'
@@ -30,6 +31,7 @@ import outputClickHandler from './functions/outputClickHandler.js'
 import permitToCreate from './functions/permitToCreate.js'
 import permitToUpdate from './functions/permitToUpdate.js'
 import updateItem from './functions/updateItem.js'
+import updateBox from './functions/updateBox.js'
 
 // CONSTS -----------------------------------------------------------
 import getURL from './consts/url.js'
@@ -57,7 +59,9 @@ function App() {
   })
   const [showModal, setShowModal] = useState(false)
   const [showModalItem, setShowModalItem] = useState(false)
-  const [dataItem, setDataItem] = useState('initial')
+  const [dataItem, setDataItem] = useState()
+  const [dataItemBox, setDataItemBox] = useState()
+  const [showModalItemBox, setShowModalItemBox] = useState(false)
 
   useEffect(() => {
     getAll(url.getAll, setData)
@@ -109,6 +113,8 @@ function App() {
         setShowModalItem={setShowModalItem}
         createList={createList}
         outputClickHandler={outputClickHandler}
+        setShowModalItemBox={setShowModalItemBox}
+        setDataItemBox={setDataItemBox}
       />
 
       {showModalItem && (
@@ -160,6 +166,21 @@ function App() {
             />
           </div>
         </ModalItem>
+      )}
+
+      {showModalItemBox && (
+        <ModalBox
+          setShowModalItemBox={setShowModalItemBox}
+          updateBox={updateBox}
+          url={url}
+          dataItemBox={dataItemBox}
+          setOutputList={setOutputList}
+          setStatus={setStatus}
+          getAll={getAll}
+          setData={setData}
+        >
+          <Boxes getBoxNumbers={getBoxNumbers} />
+        </ModalBox>
       )}
     </>
   )
