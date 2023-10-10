@@ -1,10 +1,34 @@
+// CSS
 import './style.css'
+
+// EXTERNAL
 import { createRoot } from 'react-dom/client'
 import React, { useEffect, useState } from 'react'
-import Input from './components/input.js'
-import Button from './components/button-create.js'
-import Output from './components/output.js'
 
+// COMPONENTS
+import Input from './components/input.js'
+import ButtonCreate from './components/button-create.js'
+import Output from './components/output.js'
+import Boxes from './components/boxes.js'
+import ModalItem from './components/modal-item.js'
+import ModalCreate from './components/modal-create.js'
+
+// FUNCTIONS
+import createItem from './functions/createItem.js'
+import createList from './functions/createList.js'
+import deleteItem from './functions/deleteItem.js'
+import filterDataByInput from './functions/filterDataByInput.js'
+import getAll from './functions/getAll.js'
+import getBoxNumbers from './functions/getBoxNumbers.js'
+import highlightFullMatches from './functions/highlightFullMatches.js'
+import itemDeleteHandler from './functions/itemDeleteHandler.js'
+import modalHandler from './functions/modalHandler.js'
+import outputClickHandler from './functions/outputClickHandler.js'
+import permitToCreate from './functions/permitToCreate.js'
+
+// CONSTS
+import getURL from './consts/url.js'
+const url = getURL()
 const rootElem = document.getElementById('root')
 const root = createRoot(rootElem)
 
@@ -19,67 +43,81 @@ function App() {
     type: 'error',
     message: null,
   })
+  const [showModal, setShowModal] = useState(false)
+  const [showModalItem, setShowModalItem] = useState(false)
+  const [dataItem, setDataItem] = useState('initial')
 
   useEffect(() => {
-    getAll(setData)
+    getAll(url.getAll, setData)
   }, [])
 
   return (
     <>
       <h1>Boxes</h1>
-      <Button
-        setStatus={setStatus} //
-        fullMatch={fullMatch} //
-        setData={setData}
+
+      <ButtonCreate
+        setStatus={setStatus}
+        fullMatch={fullMatch}
+        setShowModal={setShowModal}
+        permitToCreate={permitToCreate}
       />
+
+      {showModal && (
+        <ModalCreate
+          modalHandler={modalHandler}
+          setShowModal={setShowModal}
+          setStatus={setStatus}
+          setData={setData}
+          createItem={createItem}
+        >
+          <Boxes getBoxNumbers={getBoxNumbers}></Boxes>
+        </ModalCreate>
+      )}
+
       <Input
-        filterDataByInput={filterDataByInput} //
-        data={data} //
-        setOutputList={setOutputList} //
-        setStatus={setStatus} //
+        filterDataByInput={filterDataByInput}
+        data={data}
+        setOutputList={setOutputList}
+        setStatus={setStatus}
         setFullMatch={setFullMatch}
+        highlightFullMatches={highlightFullMatches}
       />
       {status.show && (
         <p id="status" className={`status-${status.type}`}>
           {status.message}
         </p>
       )}
+
       <Output
         outputList={outputList}
-        setStatus={setStatus}
-        setOutputList={setOutputList}
-        setData={setData}
+        setDataItem={setDataItem}
+        setShowModalItem={setShowModalItem}
+        createList={createList}
+        outputClickHandler={outputClickHandler}
       />
-      {/* <ul className="output-list">{outputList}</ul> */}
+
+      {showModalItem && (
+        <ModalItem setShowModalItem={setShowModalItem}>
+          <div>{dataItem.item}</div>
+          <button>update</button>
+          <button
+            onClick={() =>
+              itemDeleteHandler(
+                dataItem,
+                setStatus,
+                deleteItem,
+                setShowModalItem,
+                setOutputList,
+                setData,
+                url,
+                getAll
+              )
+            }
+          >
+            delete
+          </button>
+        </ModalItem>
+      )}
     </>
   )
-}
-
-// FUNCTIONS
-
-function filterDataByInput(value, data, setOutputList) {
-  const values = value.toLowerCase().split(';')
-  const lastValue = values.at(-1).trim()
-  if (lastValue === '') {
-    setOutputList(null)
-    return
-  }
-  const filteredData = data.filter(e => {
-    const lastValueEscaped = lastValue.replace(
-      /[\[\]\{\}\(\)\\\^\$\.\|\?\*\+]/g,
-      '\\$&'
-    )
-    return e.item.match(new RegExp(lastValueEscaped, 'gi'))
-  })
-  // const newOutputList = filteredData.map((e, i) => {
-  //   return <li key={i}>{`${e.box} ${e.item}`}</li>
-  // })
-  setOutputList(filteredData)
-}
-
-export async function getAll(setData) {
-  const url = 'http://localhost:3333/database/get-all'
-  const res = await fetch(url)
-  const data = await res.json()
-  setData(data)
 }
