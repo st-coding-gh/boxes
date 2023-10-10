@@ -28,6 +28,8 @@ import itemDeleteHandler from './functions/itemDeleteHandler.js'
 import modalHandler from './functions/modalHandler.js'
 import outputClickHandler from './functions/outputClickHandler.js'
 import permitToCreate from './functions/permitToCreate.js'
+import permitToUpdate from './functions/permitToUpdate.js'
+import updateItem from './functions/updateItem.js'
 
 // CONSTS -----------------------------------------------------------
 import getURL from './consts/url.js'
@@ -42,8 +44,13 @@ function App() {
   const [data, setData] = useState()
   const [outputList, setOutputList] = useState()
   const [fullMatch, setFullMatch] = useState(false)
-  const [fullMatchModalItem, setFullMatchModalItem] = useState(false)
+  const [fullMatchModalItem, setFullMatchModalItem] = useState(true)
   const [status, setStatus] = useState({
+    show: false,
+    type: 'error',
+    message: null,
+  })
+  const [statusModalItem, setStatusModalItem] = useState({
     show: false,
     type: 'error',
     message: null,
@@ -88,11 +95,13 @@ function App() {
         setFullMatch={setFullMatch}
         highlightFullMatches={highlightFullMatches}
       />
-      {status.show && (
-        <p id="status" className={`status-${status.type}`}>
-          {status.message}
-        </p>
-      )}
+      <div className="status-container">
+        {status.show && (
+          <p id="status" className={`status-${status.type}`}>
+            {status.message}
+          </p>
+        )}
+      </div>
 
       <Output
         outputList={outputList}
@@ -103,7 +112,9 @@ function App() {
       />
 
       {showModalItem && (
-        <ModalItem setShowModalItem={setShowModalItem}>
+        <ModalItem
+          setShowModalItem={setShowModalItem} //
+        >
           <div>
             <ModalItemInput
               dataItem={dataItem}
@@ -112,8 +123,30 @@ function App() {
               setFullMatchModalItem={setFullMatchModalItem}
             />
           </div>
+          <div className="status-container">
+            {statusModalItem.show && (
+              <p
+                id="modal-item-status"
+                className={`status-${statusModalItem.type}`}
+              >
+                {statusModalItem.message}
+              </p>
+            )}
+          </div>
           <div className="modal-item-button-container">
-            <ModalItemUpdate />
+            <ModalItemUpdate
+              permitToUpdate={permitToUpdate}
+              fullMatchModalItem={fullMatchModalItem}
+              dataItem={dataItem} //
+              setStatusModalItem={setStatusModalItem}
+              setStatus={setStatus}
+              setShowModalItem={setShowModalItem}
+              getAll={getAll}
+              url={url}
+              setData={setData}
+              updateItem={updateItem}
+              setOutputList={setOutputList}
+            />
             <ModalItemDelete
               itemDeleteHandler={itemDeleteHandler}
               dataItem={dataItem}

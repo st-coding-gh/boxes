@@ -37,20 +37,21 @@ export async function updateItem(req) {
   //errors
   let error = false
   if (!req.query.id) error = '`id` is missing in the query'
-  if (!req.query.item) error = '`item` is missing in the query'
-  if (!req.query.box) error = '`box` is missing in the query'
+  if (!req.query.item && !req.query.box)
+    error = '`item` and `box` are missing in the query'
   if (error) return { error: error }
 
   //update
+
+  const data = {}
+  if (req.query.box) data.box = req.query.box
+  if (req.query.item) data.item = req.query.item
 
   return prisma.items.update({
     where: {
       id: +req.query.id,
     },
-    data: {
-      box: req.query.box,
-      item: req.query.item,
-    },
+    data: data,
   })
 }
 

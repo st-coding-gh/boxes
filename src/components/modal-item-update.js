@@ -1,6 +1,38 @@
 import React from 'react'
-export default function ({}) {
+
+export default function ({
+  permitToUpdate,
+  fullMatchModalItem,
+  dataItem,
+  setStatusModalItem,
+  setStatus,
+  setShowModalItem,
+  getAll,
+  url,
+  setData,
+  updateItem,
+  setOutputList,
+}) {
   return (
-    <button onClick={() => console.log('update button clicked')}>update</button>
+    <button
+      onClick={() => {
+        const input = document.getElementById('module-item-input')
+        permitToUpdate(
+          fullMatchModalItem,
+          dataItem,
+          input.textContent,
+          setStatusModalItem,
+          setStatus,
+          setShowModalItem,
+          getAll,
+          url,
+          setData,
+          updateItem,
+          setOutputList
+        ) //
+      }}
+    >
+      update
+    </button>
   )
 }
