@@ -46,14 +46,20 @@ html {
 
 #input {
   max-width: 50rem;
+
+}
+
+.input {
+  background-color: white;
   border: 2px solid gray;
   border-radius: 0.5rem;
-  height: 3rem;
+  min-height: 3rem;
   font-size: 2rem;
   padding-left: 1rem;
 
   display: flex;
   align-items: center;
+
 }
 
 #status {
@@ -122,4 +128,11 @@ html {
 
   background-color: var(--color-boxes);
   color: white;
+}
+
+.modal-item-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1rem;
 }

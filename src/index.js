@@ -1,19 +1,22 @@
-// CSS
-import './style.css'
-
 // EXTERNAL
 import { createRoot } from 'react-dom/client'
 import React, { useEffect, useState } from 'react'
 
-// COMPONENTS
+// CSS --------------------------------------------------------------
+import './style.css'
+
+// COMPONENTS -------------------------------------------------------
 import Input from './components/input.js'
 import ButtonCreate from './components/button-create.js'
 import Output from './components/output.js'
 import Boxes from './components/boxes.js'
 import ModalItem from './components/modal-item.js'
 import ModalCreate from './components/modal-create.js'
+import ModalItemInput from './components/modal-item-input.js'
+import ModalItemDelete from './components/modal-item-delete.js'
+import ModalItemUpdate from './components/modal-item-update.js'
 
-// FUNCTIONS
+// FUNCTIONS --------------------------------------------------------
 import createItem from './functions/createItem.js'
 import createList from './functions/createList.js'
 import deleteItem from './functions/deleteItem.js'
@@ -26,7 +29,7 @@ import modalHandler from './functions/modalHandler.js'
 import outputClickHandler from './functions/outputClickHandler.js'
 import permitToCreate from './functions/permitToCreate.js'
 
-// CONSTS
+// CONSTS -----------------------------------------------------------
 import getURL from './consts/url.js'
 const url = getURL()
 const rootElem = document.getElementById('root')
@@ -35,9 +38,11 @@ const root = createRoot(rootElem)
 root.render(<App />)
 
 function App() {
+  //STATES ----------------------------------------------------------
   const [data, setData] = useState()
   const [outputList, setOutputList] = useState()
   const [fullMatch, setFullMatch] = useState(false)
+  const [fullMatchModalItem, setFullMatchModalItem] = useState(false)
   const [status, setStatus] = useState({
     show: false,
     type: 'error',
@@ -51,6 +56,7 @@ function App() {
     getAll(url.getAll, setData)
   }, [])
 
+  // ASSEMBLING ------------------------------------------------------
   return (
     <>
       <h1>Boxes</h1>
@@ -98,24 +104,28 @@ function App() {
 
       {showModalItem && (
         <ModalItem setShowModalItem={setShowModalItem}>
-          <div>{dataItem.item}</div>
-          <button>update</button>
-          <button
-            onClick={() =>
-              itemDeleteHandler(
-                dataItem,
-                setStatus,
-                deleteItem,
-                setShowModalItem,
-                setOutputList,
-                setData,
-                url,
-                getAll
-              )
-            }
-          >
-            delete
-          </button>
+          <div>
+            <ModalItemInput
+              dataItem={dataItem}
+              highlightFullMatches={highlightFullMatches}
+              data={data}
+              setFullMatchModalItem={setFullMatchModalItem}
+            />
+          </div>
+          <div className="modal-item-button-container">
+            <ModalItemUpdate />
+            <ModalItemDelete
+              itemDeleteHandler={itemDeleteHandler}
+              dataItem={dataItem}
+              setStatus={setStatus}
+              deleteItem={deleteItem}
+              setShowModalItem={setShowModalItem}
+              setOutputList={setOutputList}
+              setData={setData}
+              url={url}
+              getAll={getAll}
+            />
+          </div>
         </ModalItem>
       )}
     </>

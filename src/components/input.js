@@ -11,7 +11,9 @@ export default function Input({
   return (
     <div
       id="input"
+      className="input"
       contentEditable
+      spellCheck={false}
       onInput={event => {
         const value = event.target.textContent
         filterDataByInput(value, data, setOutputList)

@@ -1,6 +1,7 @@
 export default function highlightFullMatches(value, data, event, setFullMatch) {
   //reset fullMatch indicator
   setFullMatch(false)
+  document.getElementById('end')?.remove()
 
   // prepare values and data for comparison
   const values = value.split(';')
@@ -23,6 +24,7 @@ export default function highlightFullMatches(value, data, event, setFullMatch) {
   event.target.innerHTML = valueMod + '<span id="end"></span>'
 
   // move cursor to the end of the div input
+  const end = document.getElementById('end')
   const selection = window.getSelection()
   selection.removeAllRanges()
   const range = document.createRange()
