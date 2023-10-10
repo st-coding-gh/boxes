@@ -97,17 +97,26 @@ function App() {
       />
 
       {showModalItem && (
-        <ModalItem
-          setShowModalItem={setShowModalItem}
-          dataItem={dataItem}
-          setStatus={setStatus}
-          setOutputList={setOutputList}
-          setData={setData}
-          getAll={getAll}
-          url={url}
-          deleteItem={deleteItem}
-          itemDeleteHandler={itemDeleteHandler}
-        ></ModalItem>
+        <ModalItem setShowModalItem={setShowModalItem}>
+          <div>{dataItem.item}</div>
+          <button>update</button>
+          <button
+            onClick={() =>
+              itemDeleteHandler(
+                dataItem,
+                setStatus,
+                deleteItem,
+                setShowModalItem,
+                setOutputList,
+                setData,
+                url,
+                getAll
+              )
+            }
+          >
+            delete
+          </button>
+        </ModalItem>
       )}
     </>
   )
