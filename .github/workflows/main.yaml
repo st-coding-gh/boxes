@@ -16,11 +16,14 @@ jobs:
       - name: npm install
         run: npm install
 
+      - name: npm run build
+        run: npm run build
+
       - name: add .env
         run: echo "${{ secrets.ENV }}" > .env
 
       - name: remove files
-        run: rm -R readme.md .git .github .gitignore package-lock.json
+        run: rm -R readme.md .git .github .gitignore package-lock.json src _temp
 
       - name: list folders
         run: ls -la
