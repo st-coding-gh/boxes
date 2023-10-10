@@ -20,7 +20,6 @@ export default function modalHandler(
 
     //create item
     createItem(url.createItem, box, items).then(res => {
-      console.log(res)
       const itemsRes = res.map(e => e.item).join(', ')
       const boxRes = res[0].box
       inputElement.innerHTML = ''
