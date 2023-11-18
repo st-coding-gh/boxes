@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { URL_DB, BOX_NUMBERS } from './consts.js'
 import boxIcon from '../assets/images/box-icon.svg'
 
+const base = window.location.origin
+// const base = 'http://localhost:3333'
+const urlGetAll = new URL(URL_DB.getAll, base)
+
+console.log(origin)
+
 export default function () {
   const [allData, setAllData] = useState([])
   const [input, setInput] = useState([])
@@ -20,7 +26,7 @@ export default function () {
   }
 
   useEffect(() => {
-    fetchDatabase(URL_DB.getAll).then(data => setAllData(data))
+    fetchDatabase(urlGetAll).then(data => setAllData(data))
   }, [])
 
   return (
@@ -60,7 +66,7 @@ function CreateModal({
   if (boxSelected) {
     console.log(boxSelected)
     createItemsInBox(boxSelected, input).then(() => {
-      fetchDatabase(URL_DB.getAll).then(data => setAllData(data))
+      fetchDatabase(urlGetAll).then(data => setAllData(data))
       setInput([])
     })
     setBoxSelected(undefined)
@@ -216,7 +222,7 @@ function BoxChangeButton({ box, id, setAllData }) {
 
   if (boxSelected) {
     updateBox(id, boxSelected).then(() => {
-      fetchDatabase(URL_DB.getAll).then(data => setAllData(data))
+      fetchDatabase(urlGetAll).then(data => setAllData(data))
     })
     setBoxSelected(undefined)
   }
@@ -302,7 +308,7 @@ function ItemUpdateButton({
       onClick={() => {
         setShowModalChangeItem(false)
         updateItem(id, inputChange).then(() => {
-          fetchDatabase(URL_DB.getAll).then(data => setAllData(data))
+          fetchDatabase(urlGetAll).then(data => setAllData(data))
         })
         setInputChange(null)
       }}
@@ -317,7 +323,7 @@ function ItemDeleteButton({ id, setAllData, setShowModalChangeItem }) {
     <button
       onClick={() => {
         deleteItem(id).then(() => {
-          fetchDatabase(URL_DB.getAll).then(data => setAllData(data))
+          fetchDatabase(urlGetAll).then(data => setAllData(data))
         })
         setShowModalChangeItem(false)
       }}
@@ -330,7 +336,7 @@ function ItemDeleteButton({ id, setAllData, setShowModalChangeItem }) {
 // F U N C T I O N S =========================================
 
 async function updateItem(id, input) {
-  const updateURL = new URL(URL_DB.updateItem)
+  const updateURL = new URL(URL_DB.updateItem, base)
   updateURL.searchParams.append('id', id)
   updateURL.searchParams.append('item', input)
   const result = await fetchDatabase(updateURL)
@@ -339,7 +345,7 @@ async function updateItem(id, input) {
 }
 
 async function deleteItem(id) {
-  const deleteURL = new URL(URL_DB.deleteItem)
+  const deleteURL = new URL(URL_DB.deleteItem, base)
   deleteURL.searchParams.append('id', id)
   const result = await fetchDatabase(deleteURL)
   console.log(result)
@@ -347,7 +353,7 @@ async function deleteItem(id) {
 }
 
 async function updateBox(id, box) {
-  const updateURL = new URL(URL_DB.updateItem)
+  const updateURL = new URL(URL_DB.updateItem, base)
   updateURL.searchParams.append('id', id)
   updateURL.searchParams.append('box', box)
   const result = await fetchDatabase(updateURL)
@@ -357,7 +363,7 @@ async function updateBox(id, box) {
 
 async function createItemsInBox(box, input) {
   input = JSON.stringify(input)
-  const createURL = new URL(URL_DB.createItem)
+  const createURL = new URL(URL_DB.createItem, base)
   createURL.searchParams.append('box', box)
   createURL.searchParams.append('items', input)
   const result = await fetchDatabase(createURL)
@@ -365,8 +371,8 @@ async function createItemsInBox(box, input) {
   return result
 }
 
-async function fetchDatabase(URL) {
-  const res = await fetch(URL)
+async function fetchDatabase(url) {
+  const res = await fetch(url)
   const json = await res.json()
   return json
 }
