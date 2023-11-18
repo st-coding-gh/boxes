@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { URL_DB, BOX_NUMBERS } from './consts.js'
+import { URL_DB, BOX_NUMBERS } from '../consts/consts.js'
 import boxIcon from '../assets/images/box-icon.svg'
 
-export default function () {
+export default function Search() {
   const [allData, setAllData] = useState([])
   const [input, setInput] = useState([])
   const [flag, setFlag] = useState()
@@ -26,8 +26,6 @@ export default function () {
 
   return (
     <>
-      <h1>Boxes</h1>
-
       <Input
         rawInput={rawInput}
         setRawInput={setRawInput}

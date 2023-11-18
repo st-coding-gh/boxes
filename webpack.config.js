@@ -24,11 +24,13 @@ export default {
   output: {
     filename: filename('js'),
     path: path.resolve('static'),
+    publicPath: '/',
   },
 
   devServer: {
     port: 4444,
     hot: isDev,
+    historyApiFallback: true,
   },
 
   plugins: [

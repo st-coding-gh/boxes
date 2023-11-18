@@ -35,7 +35,23 @@ body {
   font-size: 2rem;
 }
 
+#nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 0;
+}
 
+#nav > * {
+  margin: 0;
+  all: unset;
+}
+
+#nav > h1 {
+  width: 50%;
+  font-weight: 700;
+}
 
 .highlighted {
   color: var(--color-error);
