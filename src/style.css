@@ -52,8 +52,10 @@ body {
   flex-direction: row;
 }
 
-/* .output-li > * {
-} */
+.output-li > * {
+  border: 1px solid gray;
+  box-shadow: 1px 1px black;
+}
 
 .output-box {
   width: 5rem;

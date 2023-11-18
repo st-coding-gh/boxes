@@ -1,15 +1,13 @@
-// export const URL_DB = {
-//   getAll: 'http://localhost:3333/database/get-all',
-//   createItem: 'http://localhost:3333/database/create-items',
-//   deleteItem: 'http://localhost:3333/database/delete-item',
-//   updateItem: 'http://localhost:3333/database/update-item',
-// }
+const location_origin_url = new URL(window.location.origin)
+const port = location_origin_url.port
+const isDev = port === '4444' ? true : false
+const base = isDev ? 'http://localhost:3333' : window.location.origin
 
 export const URL_DB = {
-  getAll: '/database/get-all',
-  createItem: '/database/create-items',
-  deleteItem: '/database/delete-item',
-  updateItem: '/database/update-item',
+  getAll: new URL('/database/get-all', base),
+  createItem: new URL('/database/create-items', base),
+  deleteItem: new URL('/database/delete-item', base),
+  updateItem: new URL('/database/update-item', base),
 }
 
 export const BOX_NUMBERS = [
