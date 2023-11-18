@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css'
 
 // PAGES
-import Search from './pages/search.js'
+import Search from './pages/Search.js'
 import List from './pages/List.js'
 
 const rootElem = document.getElementById('root')
