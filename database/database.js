@@ -10,21 +10,19 @@ export async function getAll() {
 }
 
 export async function createItems(req) {
-  //errors
+  //create
+  const box = req.query.box
+  const items = JSON.parse(req.query.items)
+  const noItems = !items.length
   let error = false
-  if (!req.query.items) error = '`items` is missing in the query'
-  if (!req.query.box) error = '`box` is missing in the query'
+
+  if (noItems) error = '`items` is missing in the query'
   if (error) return { error: error }
 
-  //create
-  const items = req.query.items
-    .split(';')
-    .map(e => e.trim())
-    .filter(e => e.trim() != '')
   const promises = items.map(item => {
     return prisma.items.create({
       data: {
-        box: req.query.box,
+        box: box,
         item: item,
       },
     })
@@ -42,14 +40,14 @@ export async function updateItem(req) {
   if (error) return { error: error }
 
   //update
-
   const data = {}
   if (req.query.box) data.box = req.query.box
   if (req.query.item) data.item = req.query.item
+  const id = +req.query.id
 
   return prisma.items.update({
     where: {
-      id: +req.query.id,
+      id: id,
     },
     data: data,
   })

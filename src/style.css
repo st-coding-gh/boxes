@@ -2,12 +2,32 @@
 :root {
   --color-error: crimson;
   --color-success: darkgreen;
-  --color-boxes: darkslategrey;
-  --color-modal: #cfe5cf;
+  /* --color-boxes: darkslategrey; */
+  --color-boxes: gray;
+  --color-modal: white;
+
+  --color-body: white;
+  --color-filtered: white;
+  --color-input: white;
+  --color-button: white
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+
+button {
+  background-color: var(--color-button);
 }
 
 html {
   font-size: 10px;
+}
+
+body {
+  height: 100svh;
+  background-color: var(--color-body)
 }
 
 *, button {
@@ -32,6 +52,9 @@ html {
   flex-direction: row;
 }
 
+.output-li > * {
+}
+
 .output-box {
   width: 5rem;
   min-height: 5rem;
@@ -44,22 +67,29 @@ html {
   margin-right: 1rem;
 }
 
-#input {
-  max-width: 50rem;
-
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.input {
-  background-color: white;
+#input {
+  width: 100%;
+  background-color: var(--color-input);
   border: 2px solid gray;
-  border-radius: 0.5rem;
   min-height: 3rem;
   font-size: 2rem;
-  padding-left: 1rem;
+  padding: 1rem;
+}
 
-  display: flex;
-  align-items: center;
+.input-box-icon {
+  width: 35px;
+  filter: grayscale(1);
+}
 
+.input-button {
+  border: none;
+  background-color: unset;
 }
 
 .status-container {
@@ -67,13 +97,11 @@ html {
   margin: 0;
   font-size: 1.7rem;
   min-height: 3rem;
-  padding-left: 1rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem;
 }
 
 .status-container > * {
   font-size: 1.7rem;
-  position:absolute;
   top: 0;
   left: 0;
   margin: 0;
@@ -145,4 +173,31 @@ html {
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1rem;
+}
+
+.item-change {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.item-change-input-container {
+  width: 100%;
+  padding: 0 1px;
+}
+
+.item-change-input-container > input {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+}
+
+.item-change-buttons-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.item-change-buttons-container > button {
+  padding: 1rem;
 }

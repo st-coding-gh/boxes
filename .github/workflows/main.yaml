@@ -39,4 +39,5 @@ jobs:
 
       - name: upload to server
         # run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . --exclude '/database' ${{ secrets.USER}}@${{ secrets.SERVER_NAME }}:${{ secrets.DIR }}
-        run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . ${{ secrets.USER}}@${{ secrets.SERVER_NAME }}:${{ secrets.DIR }}
+        # run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . ${{ secrets.USER}}@${{ secrets.SERVER_NAME }}:${{ secrets.DIR }}
+        run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . --exclude '/database/content.db' ${{ secrets.USER}}@${{ secrets.SERVER_NAME }}:${{ secrets.DIR }}
