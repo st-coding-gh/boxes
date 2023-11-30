@@ -27,14 +27,14 @@ function BoxesList({ list }) {
       </li>
     )
   })
-  return <ul>{boxesLi}</ul>
+  return <ul className="list-ul">{boxesLi}</ul>
 }
 
 function ItemsList({ box, list }) {
   const items = list[box].map((e, i) => {
     return <li key={i}>{e}</li>
   })
-  return <ul className="list-ul">{items}</ul>
+  return <ul>{items}</ul>
 }
 
 // F U N C T I O N S ===============================================
