@@ -149,7 +149,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   padding-top: 10rem;
 }
 
@@ -157,7 +156,6 @@ body {
   font-size: 3rem;
   color: black;
   width: 30rem;
-  /* height: 30rem; */
   border: 2px solid gray;
   padding: 1rem;
   box-shadow: 5px 5px gray;
@@ -170,7 +168,6 @@ body {
   grid-template-columns: repeat(6, 1fr);
   align-content: space-evenly;
   justify-content: space-evenly;
-  /* background-color: var(--color-modal); */
 }
 
 #boxes > li {
@@ -220,4 +217,9 @@ body {
 
 .item-change-buttons-container > button {
   padding: 1rem;
+}
+
+.list-ul {
+  list-style-type: none;
+  padding: 0;
 }

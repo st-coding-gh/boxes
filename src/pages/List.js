@@ -9,8 +9,6 @@ export default function () {
     getList(URL_DB.getAll, setList)
   }, [])
 
-  console.log(list)
-
   return (
     <>
       <BoxesList list={list} />
@@ -36,7 +34,7 @@ function ItemsList({ box, list }) {
   const items = list[box].map((e, i) => {
     return <li key={i}>{e}</li>
   })
-  return <ul>{items}</ul>
+  return <ul className="list-ul">{items}</ul>
 }
 
 // F U N C T I O N S ===============================================
