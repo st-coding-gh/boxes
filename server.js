@@ -3,7 +3,6 @@ import fs from 'node:fs'
 import path from 'node:path'
 const app = express()
 const port = 3333
-const paths = ['/:controller', '/:controller/:action']
 
 async function router(req, res) {
   const route = {}
