@@ -221,5 +221,9 @@ body {
 
 .list-ul {
   list-style-type: none;
-  padding: 0;
+  padding: 0 3rem;
+}
+
+.list-ul ul {
+  list-style-type: none;
 }
