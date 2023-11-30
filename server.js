@@ -8,9 +8,6 @@ async function router(req, res) {
   const route = {}
   route.controller = req.params.controller
   route.action = req.params.action ?? 'index'
-
-  console.log(route)
-
   const file = `./controllers/${route.controller}/${route.action}.js`
   if (!fs.existsSync(file)) {
     res.send(`controller does not exist at path: ${file}`)
